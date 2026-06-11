@@ -16,6 +16,7 @@ body {
   background: white;
   border-radius: 8px;
   box-shadow: 0 0 12px rgba(0,0,0,0.1);
+  box-sizing: border-box;
 }
 
 #login h2 {
@@ -88,6 +89,31 @@ body {
   margin-bottom: 4px;
 }
 
+/* メッセージ内のテキスト配置用 */
+.message .text-content {
+  margin-right: 24px; /* コピーボタンと重ならないための余白 */
+}
+
+/* コピーボタンのスタイル */
+.copy-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 2px;
+  font-size: 11px;
+  color: #888;
+  border-radius: 3px;
+  line-height: 1;
+}
+
+.copy-btn:hover {
+  color: #333;
+  background: rgba(0, 0, 0, 0.05);
+}
+
 .message.self {
   background-color: #d7f0d3;
   margin-left: auto;
@@ -136,4 +162,41 @@ form input[type="file"] {
 
 form button {
   font-weight: bold;
+}
+
+/* --- 画面の大きさ（デバイスサイズ）に合わせたレイアウト調整（強化レスポンシブ） --- */
+
+/* タブレット・PCなど画面幅が広い場合 */
+@media (min-width: 768px) {
+  #chat {
+    max-width: 700px; /* 大画面ではチャットエリアを少し広く見やすく */
+  }
+  #messages {
+    height: 550px; /* 高さに余裕を持たせる */
+  }
+  .message {
+    max-width: 70%; /* 横に広がりすぎないスマートな幅に調整 */
+  }
+}
+
+/* スマートフォンなど画面幅が狭い場合 */
+@media (max-width: 480px) {
+  body {
+    height: 100%;
+    min-height: 100vh;
+  }
+  #login, #chat {
+    margin: 10px auto;
+    width: calc(100% - 20px);
+    border-radius: 6px;
+    padding: 15px;
+  }
+  #messages {
+    height: calc(100vh - 240px); /* 画面全体の高さからフォーム分を引いて最適化 */
+    min-height: 300px;
+  }
+  .message {
+    max-width: 85%; /* モバイルではメッセージを横いっぱいに有効活用 */
+    padding: 8px 12px;
+  }
 }
